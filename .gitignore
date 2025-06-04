@@ -1,0 +1,72 @@
+
+# =========================
+# Python-related
+# =========================
+__pycache__/
+*.py[cod]
+*.so
+*.egg-info/
+*.pyo
+*.pyd
+
+# =========================
+# Virtual environments
+# =========================
+.env/
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+
+# =========================
+# Jupyter Notebook
+# =========================
+.ipynb_checkpoints/
+.jupyter/
+.ipython/
+
+# =========================
+# VS Code settings
+# =========================
+.vscode/
+
+# =========================
+# PyCharm / IntelliJ IDEA
+# =========================
+.idea/
+*.iml
+
+# =========================
+# OS / Misc
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Logs / Output / Temp
+# =========================
+*.log
+*.out
+*.aux
+*.tmp
+
+# =========================
+# Data and model files (optional)
+# You may keep raw/processed data elsewhere or use Git LFS
+# =========================
+*.csv
+*.tsv
+*.h5
+*.hdf5
+*.npy
+*.npz
+*.pkl
+*.db
+*.sqlite3
+*.zip
+*.tar.gz
+*.pt
+*.ckpt
+*.onnx
+*.pb
