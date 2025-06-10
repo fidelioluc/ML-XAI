@@ -4,8 +4,8 @@ from nltk.tokenize import word_tokenize
 from sentence_transformers import SentenceTransformer
 
 # --- TF-IDF ---
-def apply_tfidf(docs, max_features=1000):
-    vectorizer = TfidfVectorizer(lowercase=True, stop_words='english', max_features=max_features)
+def apply_tfidf(docs):
+    vectorizer = TfidfVectorizer(lowercase=True, stop_words='english', max_features=10)
     X = vectorizer.fit_transform(docs)
     return X, vectorizer
 
