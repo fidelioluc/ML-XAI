@@ -59,7 +59,7 @@ Thumbs.db
 *.tsv
 *.h5
 *.hdf5
-*.npy
+#*.npy
 #*.npz
 #*.pkl
 *.db
