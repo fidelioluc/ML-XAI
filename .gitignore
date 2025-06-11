@@ -59,11 +59,7 @@ Thumbs.db
 *.tsv
 *.h5
 *.hdf5
-<<<<<<< HEAD
-*.npy
-=======
 #*.npy
->>>>>>> 88324c382558ce0d8d9717c9d8faea0b4609af09
 #*.npz
 #*.pkl
 *.db
@@ -74,3 +70,5 @@ Thumbs.db
 *.ckpt
 *.onnx
 *.pb
+*.png
+*.jpg
