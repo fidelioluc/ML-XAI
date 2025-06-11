@@ -3,9 +3,12 @@ from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from nltk.tokenize import word_tokenize
 from sentence_transformers import SentenceTransformer
 
+
 # --- TF-IDF ---
-def apply_tfidf(docs):
-    vectorizer = TfidfVectorizer(lowercase=True, stop_words='english', max_features=10)
+def apply_tfidf(docs, max_features=10000):
+    vectorizer = TfidfVectorizer(
+        lowercase=True, stop_words="english", max_features=max_features
+    )
     X = vectorizer.fit_transform(docs)
     return X, vectorizer
 
@@ -13,11 +16,17 @@ def apply_tfidf(docs):
 # --- Doc2Vec ---
 def prepare_tagged_data(docs):
     """Tokenizes and tags documents for Doc2Vec training."""
-    return [TaggedDocument(words=word_tokenize(doc.lower()), tags=[str(i)]) for i, doc in enumerate(docs)]
+    return [
+        TaggedDocument(words=word_tokenize(doc.lower()), tags=[str(i)])
+        for i, doc in enumerate(docs)
+    ]
+
 
 def apply_doc2vec(docs, vector_size=100, epochs=20, window=5, min_count=2):
     tagged_data = prepare_tagged_data(docs)
-    model = Doc2Vec(vector_size=vector_size, window=window, min_count=min_count, workers=4)
+    model = Doc2Vec(
+        vector_size=vector_size, window=window, min_count=min_count, workers=4
+    )
     model.build_vocab(tagged_data)
     model.train(tagged_data, total_examples=model.corpus_count, epochs=epochs)
 
