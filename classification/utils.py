@@ -5,46 +5,19 @@ import seaborn as sns
 from sklearn.metrics import confusion_matrix
 import pandas as pd
 import numpy as np
+import joblib
+import os
 
 
-def train_val_test_split(
-    X, y, test_size=0.15, val_size=0.20, random_state=42, shuffle=True, stratify=None
-):
-    """
-    Splits the dataset into training, validation, and test sets.
+def load_model(model_name: str):  # TODO: adjust to be called from all (sub)directories
+    # Assuming this script is in a subdirectory of the project root
+    project_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
+    model_path = os.path.join(project_root, "models", f"{model_name}.pkl")
 
-    Parameters:
-    - X: Features
-    - y: Labels
-    - test_size: Proportion of the dataset to include in the test split
-    - val_size: Proportion of the training set to include in the validation split
-    - random_state: Controls the shuffling applied to the data before applying the split
-
-    Returns:
-    - X_train, X_val, X_test, y_train, y_val, y_test
-    """
-    X_train_val, X_test, y_train_val, y_test = train_test_split(
-        X,
-        y,
-        test_size=test_size,
-        random_state=random_state,
-        shuffle=shuffle,
-        stratify=stratify,
-    )
-
-    # Adjust val_size relative to the remaining data
-    val_size_adjusted = round(val_size / (1 - test_size), 2)
-
-    X_train, X_val, y_train, y_val = train_test_split(
-        X_train_val,
-        y_train_val,
-        test_size=val_size_adjusted,
-        random_state=random_state,
-        shuffle=shuffle,
-        stratify=y_train_val,
-    )
-
-    return X_train, X_val, X_test, y_train, y_val, y_test
+    # Load model
+    model = joblib.load(model_path)
+    print(f"Loaded {model_name} with params: \n{model.get_params}")
+    return model
 
 
 def plot_classification_results(results_dict, X_test_dict, y_test_dict, save_path=None):
