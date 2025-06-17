@@ -12,7 +12,7 @@ import os
 def load_model(model_name: str):  # TODO: adjust to be called from all (sub)directories
     # Assuming this script is in a subdirectory of the project root
     project_root = os.path.abspath(os.path.join(os.getcwd(), ".."))
-    model_path = os.path.join(project_root, "models", f"{model_name}.pkl")
+    model_path = os.path.join(project_root, "models", f"{model_name}")
 
     # Load model
     model = joblib.load(model_path)
