@@ -3,6 +3,8 @@ from gensim.models.doc2vec import Doc2Vec, TaggedDocument
 from nltk.tokenize import word_tokenize
 from sentence_transformers import SentenceTransformer
 from sklearn.base import BaseEstimator, TransformerMixin
+import pandas as pd
+import numpy as np
 
 
 # --- Doc2Vec ---
@@ -45,4 +47,17 @@ class SbertVectorizer(BaseEstimator, TransformerMixin):
         return self  # No fitting needed
 
     def transform(self, X):
+        # Handle common input formats
+        if isinstance(X, pd.DataFrame):
+            # Use the first column by default
+            X = X.iloc[:, 0].astype(str).tolist()
+        elif isinstance(X, pd.Series):
+            X = X.astype(str).tolist()
+        elif isinstance(X, np.ndarray):
+            X = X.astype(str).tolist()
+        elif isinstance(X, list):
+            pass  # assume it's fine
+        else:
+            raise ValueError(f"Unsupported input type: {type(X)}")
+
         return self.model.encode(X, show_progress_bar=False)
