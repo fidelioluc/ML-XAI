@@ -3,10 +3,10 @@ from lime.lime_text import LimeTextExplainer
 
 def lime_explanation(pipeline, class_names, text_instance, num_features=10):
     """
-    Generate a LIME explanation for a given text input and pipeline.
+    Generate a LIME explanation for a given text input and 02_Pipeline.
 
     Parameters:
-    - pipeline: sklearn Pipeline with a vectorizer + classifier
+    - 02_Pipeline: sklearn Pipeline with a vectorizer + classifier
     - class_names: list of class names (e.g. ["spam", "not spam"])
     - text_instance: a single string to explain
     - num_features: number of most important features to display
