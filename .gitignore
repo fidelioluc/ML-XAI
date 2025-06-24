@@ -59,9 +59,11 @@ Thumbs.db
 *.tsv
 *.h5
 *.hdf5
-#*.npy
-#*.npz
-#*.pkl
+*.npy
+*.npz
+*.pkl # exclude all .pkl files
+!final_models/*.pkl # except the trained classifier models
+models/*.pkl
 *.db
 *.sqlite3
 *.zip
