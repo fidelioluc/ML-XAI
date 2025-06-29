@@ -53,7 +53,7 @@ Thumbs.db
 
 # =========================
 # Data and model files (optional)
-# You may keep raw/processed out elsewhere or use Git LFS
+# You may keep raw/processed data elsewhere or use Git LFS
 # =========================
 #*.csv
 *.tsv
@@ -72,5 +72,4 @@ models/*.pkl
 *.ckpt
 *.onnx
 *.pb
-*.png
 *.jpg

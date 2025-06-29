@@ -38,26 +38,46 @@ class GensimDoc2VecVectorizer(BaseEstimator, TransformerMixin):
 
 
 # --- S-BERT ---
-class SbertVectorizer(BaseEstimator, TransformerMixin):
-    def __init__(self, model_name="all-MiniLM-L6-v2"):
+from sklearn.base import BaseEstimator, TransformerMixin
+from sentence_transformers import SentenceTransformer
+
+
+class SBERTVectorizer(BaseEstimator, TransformerMixin):
+    """SBERT Sentence Transformer Vectorizer"""
+
+    def __init__(self, model_name='all-MiniLM-L6-v2'):
         self.model_name = model_name
-        self.model = SentenceTransformer(model_name)
+        self.model = None
 
     def fit(self, X, y=None):
-        return self  # No fitting needed
+        # Initialize the SBERT model
+        self.model = SentenceTransformer(self.model_name)
+        return self
 
     def transform(self, X):
-        # Handle common input formats
-        if isinstance(X, pd.DataFrame):
-            # Use the first column by default
-            X = X.iloc[:, 0].astype(str).tolist()
-        elif isinstance(X, pd.Series):
-            X = X.astype(str).tolist()
-        elif isinstance(X, np.ndarray):
-            X = X.astype(str).tolist()
-        elif isinstance(X, list):
-            pass  # assume it's fine
-        else:
-            raise ValueError(f"Unsupported input type: {type(X)}")
+        if self.model is None:
+            raise ValueError("Model not fitted. Call fit() first.")
 
-        return self.model.encode(X, show_progress_bar=False)
+        # Convert to list
+        texts = X.tolist() if hasattr(X, 'tolist') else list(X)
+
+        # Replace invalid entries with empty strings and cast everything to str
+        cleaned_texts = []
+        replaced_count = 0
+        for text in texts:
+            if isinstance(text, str):
+                cleaned_texts.append(text)
+            else:
+                cleaned_texts.append("")
+                replaced_count += 1
+
+        if replaced_count > 0:
+            print(f"[Warning] Replaced {replaced_count} invalid text entries with empty strings.")
+
+        # Generate embeddings
+        embeddings = self.model.encode(cleaned_texts, show_progress_bar=True)
+        return embeddings
+
+    def fit_transform(self, X, y=None):
+        return self.fit(X, y).transform(X)
+

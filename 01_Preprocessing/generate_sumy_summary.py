@@ -64,9 +64,9 @@ def summarize_filtered_20newsgroups(n=1000, min_sentences=6):
 
 # ---------- Run Script ----------
 if __name__ == "__main__":
-    df = summarize_filtered_20newsgroups(n=1000, min_sentences=6)
-    df.to_csv("20newsgroup_summaries.csv", index=False)
-    print(f"✅ Saved {len(df)} summarized rows to 20newsgroup_summaries.csv")
+    df = summarize_filtered_20newsgroups(n=12000, min_sentences=6)
+    df.to_csv("20newsgroup_sumy_summary.csv", index=False)
+    print(f"✅ Saved {len(df)} summarized rows to 20newsgroup_sumy_summary.csv")
 
 
 

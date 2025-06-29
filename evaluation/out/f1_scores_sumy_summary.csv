@@ -1,0 +1,4 @@
+vectorizer,model_name,f1_score
+tfidf,dt,0.8303442658245607
+tfidf,mlp,0.9150547443294534
+tfidf,svm,0.9170835127766493
